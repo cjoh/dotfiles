@@ -1,0 +1,55 @@
+function scrapeUrl() {
+    wget --adjust-extension --convert-links --page-requisites --span-hosts --no-host-directories "$1"
+}
+
+tl () {
+  if [ $2 ]; then
+    tail -n 100 -f $1 | grep --line-buffered $2
+  else
+    tail -n 100 -f $1
+  fi
+}
+
+transfer() {
+    # write to output to tmpfile because of progress bar
+    tmpfile=$( mktemp -t transferXXX )
+    curl --progress-bar --upload-file $1 https://transfer.sh/$(basename $1) >> $tmpfile;
+    cat $tmpfile;
+    cat $tmpfile | pbcopy;
+    rm -f $tmpfile;
+}
+
+function digga {
+    dig +nocmd "$1" any +multiline +noall +answer
+}
+
+function mkd() {
+    mkdir -p "$@" && cd "$@"
+}
+
+function fs() {
+    if du -b /dev/null > /dev/null 2>&1; then
+        local arg=-sbh
+    else
+        local arg=-sh
+    fi
+    if [[ -n "$@" ]]; then
+        du $arg -- "$@"
+    else
+        du $arg .[^.]* *
+    fi
+}
+
+archive () {
+   zip -r "$1".zip -i "$1" ;
+}
+
+function weather() {
+   city="$1"
+
+   if [ -z "$city" ]; then
+      city="Atlanta"
+   fi
+
+   eval "curl http://wttr.in/${city}"
+}

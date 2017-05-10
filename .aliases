@@ -1,0 +1,25 @@
+# PHP Related Aliases
+alias pa="php artisan"
+alias phpunit="vendor/bin/phpunit"
+alias t="tl storage/logs/laravel.log"
+alias tf="tl storage/logs/laravel.log"
+alias ci="composer install"
+alias cr="composer require"
+
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias l="ls -laF"
+alias scrape="scrapeUrl"
+alias stt="st ."
+alias aliases="cat $HOME/.dotfiles/.aliases"
+
+alias m="mysql -u root"
+alias gc="git clone"
+
+# Flush Directory Service cache
+alias flushdns="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder"
+
+# Lock the screen
+alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
